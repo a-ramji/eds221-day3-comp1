@@ -9,7 +9,8 @@ execute:
 ## Conditional Statements
 
 ```{r}
-
+library(tidyverse)
+library(palmerpenguins)
 ```
 
 ```{r}
@@ -108,6 +109,89 @@ for (i in seq_along(height)) {
 
 ## For loop with conditional statement
 
+side note: pseudo code --\> here's what i think the logic would look like
+
+Instructions: try to write a for loop with a conditional (if) statement that returns the means of all NUMERIC variables in the penguins dataset.
+
+-   is.numeric (asks is this thing numeric?)
+
+-   mean(vec, na.rm = TRUE)
+
 ```{r}
 
+for (i in seq_along(penguins)) {
+  if (is.numeric(penguins[[i]])) {
+    penguin_mean <- mean(penguins[[i]], na.rm = TRUE)
+    print(penguin_mean)
+  }
+}
+
+```
+
+note: we'll use where() later
+
+apply(), across(), mutate(), and summarize()
+
+## Functional programming for easier iteration
+
+Use apply() to iterate over rows or columns. MARGIN = 1 (rows) , MARGIN = 2 (columns)
+
+apply(array, margin, fun, ... , simplify)
+
+margin = 1 (rows)
+
+margin = 2 (columns)
+
+fun = function you want to apply to columns
+
+```{r}
+apply(X = mtcars, MARGIN = 2, FUN = median)
+# same thing, just not explicit
+apply(mtcars, 2, median)
+```
+
+## dplyr::across()
+
+add group_by() and summarize()
+
+Starter: calculate/find the mean flipper length of penguins by species
+
+under the hood, whatever you apply after group_by, it knows that you want to do that for each group that exists within whatever variable you grouped by
+
+group_by(one variable, another variable if u want!)
+
+```{r}
+penguins |> 
+  group_by(species, sex, island) |> 
+  summarize(mean_flipper_length = mean(flipper_length_mm, na.rm = TRUE),
+            sd_flipper_length = sd(flipper_length_mm, na.rm = TRUE),
+            max_body_mass = max(body_mass_g, na.rm = TRUE)
+            )
+
+```
+
+use across() within summarize() to only calculate a mean value for numeric variables/columns
+
+```{r}
+penguins |> 
+  group_by(species, island) |> 
+  summarize(across(where(is.numeric), mean, na.rm = TRUE))
+```
+
+across() is super powerful! so is group_by() !! and summarize() !!
+
+## Detecting a string pattern
+
+stringr() package has cool built-in functions
+
+str_detect
+
+```{r}
+food <- "I love burritos"
+
+if (str_detect(food, "burritos")) {
+  print("Yay, burritos!")
+} else {
+  print("But what about burritos?")
+}
 ```
