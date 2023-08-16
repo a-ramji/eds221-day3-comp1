@@ -6,23 +6,36 @@ execute:
   warning: false
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Conditional Statements
 
 ```{r}
-1 + 1
-```
 
-You can add options to executable code like this
+```
 
 ```{r}
-#| echo: false
-2 * 2
+temperature <- 98.2
+
+# if condition isn't met, it returns nothing
+
+if (temperature > 97) {
+  print("Temperature warning")
+} else 
+  print("No temperature warning")
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+Create an if else statement for blue whale lengths. Create a variable blue whale, which has a value of 40 (meters). Add an if else statement that returns "GIANT" if the length exceeds 35, "MEDIUM" if the length is between 20 and 35, or "SMALL" if the length is \<= 20.
+
+```{r}
+
+blue_whale <- 40
+
+if (blue_whale > 35) {
+  print("GIANT")
+} else if (blue_whale > 20 & blue_whale <= 35) {
+  print("MEDIUM")
+} else if (blue_whale <= 20) {
+  print("SMALL")
+}
+  
+
+```
