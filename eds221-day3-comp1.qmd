@@ -9,7 +9,8 @@ execute:
 ## Conditional Statements
 
 ```{r}
-
+library(tidyverse)
+library(palmerpenguins)
 ```
 
 ```{r}
@@ -107,6 +108,29 @@ for (i in seq_along(height)) {
 ```
 
 ## For loop with conditional statement
+
+side note: pseudo code --\> here's what i think the logic would look like
+
+Instructions: try to write a for loop with a conditional (if) statement that returns the means of all NUMERIC variables in the penguins dataset.
+
+-   is.numeric (asks is this thing numeric?)
+
+-   mean(vec, na.rm = TRUE)
+
+```{r}
+
+for (i in seq_along(penguins)) {
+  if (is.numeric(penguins[[i]])) {
+    penguin_mean <- mean(penguins[[i]], na.rm = TRUE)
+    print(penguin_mean)
+  }
+}
+
+```
+
+note: we'll use where() later
+
+apply(), across(), mutate(), and summarize()
 
 ```{r}
 
